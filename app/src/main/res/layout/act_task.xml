@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
-    tools:context=".ui.task.TaskActivity">
+    tools:context=".ui.room.RoomActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -32,13 +32,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/ic_back">
-
+            >
+            <ImageView
+                android:id="@+id/imgBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:padding="10dp"
+                android:src="@drawable/ic_back"
+                app:tint="@android:color/white" />
             <RelativeLayout
                 android:id="@+id/rlToolbarTask"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-
                 <TextView
                     android:maxWidth="250dp"
                     android:maxLines="2"
@@ -59,7 +65,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="8dp"
                     android:background="@null"
-                    android:onClick="openDrawerTask"
                     android:padding="10dp"
                     android:src="@drawable/ic_more_hor"
                     app:tint="@android:color/white" />
@@ -80,6 +85,7 @@
 
         </androidx.appcompat.widget.Toolbar>
 
+
         <com.github.florent37.hollyviewpager.HollyViewPager
             android:id="@+id/hollyViewPager"
             android:layout_width="match_parent"
@@ -87,9 +93,10 @@
             app:hvp_headerHeight="@dimen/header_height"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:layout_constraintVertical_bias="0.0" />
 
         <include
             android:id="@+id/fabAdd"
@@ -121,6 +128,8 @@
             android:id="@+id/frag_room_slider"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+<!--        android:name="com.example.scientificresearch.ui.slider.Slider_RoomFragment"-->
+<!--        tools:layout="@layout/frag_slider_room"-->
     </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

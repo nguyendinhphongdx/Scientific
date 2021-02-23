@@ -2,6 +2,7 @@ package com.example.scientificresearch.ui.main;
 
         import android.app.AlertDialog;
         import android.app.Dialog;
+        import android.content.Intent;
         import android.os.Bundle;
         import android.util.Log;
         import android.view.LayoutInflater;
@@ -24,6 +25,7 @@ package com.example.scientificresearch.ui.main;
 
         import com.example.scientificresearch.Common.Functions;
         import com.example.scientificresearch.R;
+        import com.example.scientificresearch.ui.add.AddRoomActivity;
         import com.example.scientificresearch.ui.home.HomeFragment;
         import com.example.scientificresearch.ui.notification.NotificationFragment;
         import com.example.scientificresearch.ui.profile.ProfileFragment;
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Functions.ShowToast(MainActivity.this,"Restart "+isClickedFab.toString());
+
     }
 
     private void setUp() {
@@ -73,6 +75,8 @@ public class MainActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(actionSearch);
         fabAdd.setOnClickListener(openListFab);
         setListenerNavBottom();
+        fabAddRoom.setOnClickListener(addRoom);
+        fabAddRoom.setOnLongClickListener(addRoomLong);
     }
 
 
@@ -129,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void switchFragment(int itemIndex) {
-        Functions.ShowToast(getApplicationContext(),itemIndex+"");
         Log.d("TAG", "switchFragment: "+fragments.get(itemIndex));
         getSupportFragmentManager().beginTransaction()
                 .setReorderingAllowed(true)
@@ -179,21 +182,16 @@ public class MainActivity extends AppCompatActivity {
             setPositionCslFab();
         }
     };
-    private View.OnClickListener addGroup = new View.OnClickListener() {
+    private View.OnClickListener addRoom = new View.OnClickListener() {
         public void onClick(View v) {
-//            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-//            builder.setTitle(R.string.add_group);
-//            View viewInflated = LayoutInflater.from(getApplicationContext()).inflate(R.layout.input_text_group, ,false);
-//            final EditText edtNameGroup =
-//            builder.setView(R.layout.input_text_group);
-
-
+               Intent i = new Intent(MainActivity.this, AddRoomActivity.class);
+               startActivity(i);
         }
     };
-    private View.OnLongClickListener addGroupLong = new View.OnLongClickListener() {
+    private View.OnLongClickListener addRoomLong = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
-            Functions.ShowToast(getApplicationContext(),"Thêm nhóm mới");
+            Functions.ShowToast(getApplicationContext(),"Thêm phòng mới");
             return false;
         }
     };
