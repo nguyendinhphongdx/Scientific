@@ -7,11 +7,10 @@ public class Room {
     String _id;
     String name;
     List<User> users;
-    // LIST TASK
-    public Room(String _id, String name, List<User> users) {
+
+    public Room(String _id, String name) {
         this._id = _id;
         this.name = name;
-        this.users = users;
     }
     public Room() {
     }

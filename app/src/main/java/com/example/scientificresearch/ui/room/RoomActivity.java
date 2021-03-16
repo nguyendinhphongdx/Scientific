@@ -34,7 +34,9 @@ public class RoomActivity extends AppCompatActivity {
     ArrayList<Room> rooms = Store.getRoom();
     DrawerLayout drawerTask;
     LinearLayout icSliderMember;
+    TextView txtMember;
     FragmentContainerView frag_room_slider;
+    Boolean isMember = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,23 +56,39 @@ public class RoomActivity extends AppCompatActivity {
         moreHor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frag_room_slider, Fragment.instantiate(getApplicationContext(),MemberFragment.class.getName()))
-                        .commit();
-                icSliderMember = findViewById(R.id.icSliderMember);
-                if(icSliderMember==null){
-                    Functions.ShowToast(getApplicationContext(),"members null");
-                }else{
-                    Functions.ShowToast(getApplicationContext(),"members not null");
-                    icSliderMember.setOnClickListener(open_members);
-                }
-                drawerTask.openDrawer(GravityCompat.END);
+               switchDrawer(isMember);
             }
         });
-
-
     }
 
+    private void switchDrawer(Boolean isMember) {
+        if(!isMember){
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_room_slider, Fragment.instantiate(getApplicationContext(),Slider_RoomFragment.class.getName()))
+                    .commit();
+            drawerTask.openDrawer(GravityCompat.END);
+            icSliderMember = frag_room_slider.findViewById(R.id.icSliderMember);
+
+            if(icSliderMember==null){
+                Functions.ShowToast(getApplicationContext(),"Open Null");
+            }else{
+                Functions.ShowToast(getApplicationContext(),"Open NOT");
+                txtMember = findViewById(R.id.txtMember);
+                txtMember.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Functions.ShowToast(getApplicationContext(),"Open Settings");
+                    }
+                });
+                icSliderMember.setOnClickListener(open_members);
+            }
+        }else{
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frag_room_slider, Fragment.instantiate(getApplicationContext(),MemberFragment.class.getName()))
+                    .commit();
+            drawerTask.openDrawer(GravityCompat.END);
+        }
+    }
     private void setUp() {
         current_room = queryCurrentRoom();
         tvTitle.setText(current_room.getName());
@@ -83,6 +101,7 @@ public class RoomActivity extends AppCompatActivity {
         hollyViewPager = findViewById(R.id.hollyViewPager);
         drawerTask = findViewById(R.id.drawerTask);
         frag_room_slider = findViewById(R.id.frag_room_slider);
+
     }
     private Room queryCurrentRoom() {
         String room_id =  getIntent().getStringExtra("room_id");
@@ -95,6 +114,7 @@ public class RoomActivity extends AppCompatActivity {
     }
     private View.OnClickListener open_members = new View.OnClickListener() {
         public void onClick(View v) {
+            isMember = true;
             Functions.ShowToast(getApplicationContext(),"Open Settings");
         }
     };

@@ -54,9 +54,8 @@ public class AddRoomActivity extends AppCompatActivity {
                 if(edtName.getText().length()==0){
                     Functions.ShowToast(getApplicationContext(),"Vui lòng không để trống tên phòng!");
                 }else{
-                    List<User> list = new ArrayList<>();
                     Log.d("TAG", "onClick: "+rooms.size()+"");
-                    rooms.add(new Room("id_new", edtName.getText().toString(),list));
+                    rooms.add(new Room("id_new", edtName.getText().toString()));
                     Functions.ShowToast(getApplicationContext(),"Thêm phòng thành công!");
                     finish();
                 }
