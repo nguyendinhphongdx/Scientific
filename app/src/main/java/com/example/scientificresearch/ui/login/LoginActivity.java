@@ -14,11 +14,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scientificresearch.Common.Functions;
 import com.example.scientificresearch.Model.Student;
+import com.example.scientificresearch.Model.Test;
 import com.example.scientificresearch.R;
 import com.example.scientificresearch.Server.ApiService.StudentService;
 import com.example.scientificresearch.ui.main.MainActivity;
 import com.example.scientificresearch.ui.room.RoomFragment;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,25 +86,22 @@ public class LoginActivity extends AppCompatActivity {
         if(info){
                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(i);
-            StudentService.studentService.getAllStudent().enqueue(new Callback<Student>() {
+            StudentService.studentService.TestApi().enqueue(new Callback<Test>() {
                 @Override
-                public void onResponse(Call<Student> call, Response<Student> response) {
-                    List<Student> students = new ArrayList<Student>();
-                    students = (List<Student>) response.body();
+                public void onResponse(Call<Test> call, Response<Test> response) {
                     Gson gson = new Gson();
-                    Log.d("Students",gson.toJson(students));
+                    String result = gson.toJson(response.body().getMessage());
+                    Log.d("'TestResult'", String.valueOf(result));
                 }
 
                 @Override
-                public void onFailure(Call<Student> call, Throwable t) {
-                    Functions.ShowToast(LoginActivity.this,"Fetch Error"+t.toString());
-                    Log.d("Students",t.toString());
+                public void onFailure(Call<Test> call, Throwable t) {
+                    Log.d("'TestResultE'",t.toString());
                 }
             });
         } else {
             ToastMessage("Authenticated Failed !!");
         }
-
     }
     private void ToastMessage(String message) {
         Toast.makeText(LoginActivity.this,message ,Toast.LENGTH_SHORT).show();

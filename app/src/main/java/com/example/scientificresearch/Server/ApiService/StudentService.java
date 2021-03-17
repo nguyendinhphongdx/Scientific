@@ -1,6 +1,7 @@
 package com.example.scientificresearch.Server.ApiService;
 
 import com.example.scientificresearch.Model.Student;
+import com.example.scientificresearch.Model.Test;
 import com.example.scientificresearch.Server.Config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -23,4 +24,6 @@ public interface StudentService {
 
     @GET("/student/students")
     Call<Student> getAllStudent();
+    @GET("/student/test")
+    Call<Test> TestApi();
 }

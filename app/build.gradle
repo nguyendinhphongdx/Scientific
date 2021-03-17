@@ -96,4 +96,6 @@ dependencies {
     // to run JUnit 3/4 tests:
         testImplementation("junit:junit:4.12")
        // testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0")
+    // chart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
