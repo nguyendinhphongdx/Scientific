@@ -68,6 +68,7 @@
 
     <string name="notification_title" translatable="false">Task đã đến hạn </string>
     <string name="notification_subtitle" translatable="false">Surprise!</string>
+    <string name="no_data" translatable="false">Surprise!</string>
 
     <string name="notification_schedule_title" translatable="false">Đã lên lịch:\u00a0</string>
     <string name="notification_schedule_pattern" translatable="false">dd.MM.yy \u00B7 HH:mm</string>
