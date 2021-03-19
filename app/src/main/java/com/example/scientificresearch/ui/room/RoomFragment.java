@@ -4,24 +4,19 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.scientificresearch.Adapter.RoomAdapter;
 import com.example.scientificresearch.Common.Functions;
 import com.example.scientificresearch.Model.Room;
 import com.example.scientificresearch.Model.Store;
-import com.example.scientificresearch.Model.User;
 import com.example.scientificresearch.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class RoomFragment extends Fragment {

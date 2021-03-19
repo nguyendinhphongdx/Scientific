@@ -37,7 +37,8 @@ public class Room {
     public void setUsers(List<User> users) {
         this.users = users;
     }
-
+}
+class User{
 
 }
 

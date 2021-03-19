@@ -13,17 +13,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scientificresearch.Common.Functions;
-import com.example.scientificresearch.Model.Student;
+import com.example.scientificresearch.Model.Login.ResponseModelLogin;
 import com.example.scientificresearch.Model.Test;
 import com.example.scientificresearch.R;
 import com.example.scientificresearch.Server.ApiService.StudentService;
 import com.example.scientificresearch.ui.main.MainActivity;
-import com.example.scientificresearch.ui.room.RoomFragment;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -79,24 +75,28 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     private void login() {
-        String mail = "dinhphong";
+        String mail = "phongnguyendx@gmail.com";
         String pass = "123456";
         Boolean info = true;
         ToastMessage(info.toString());
         if(info){
-                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(i);
-            StudentService.studentService.TestApi().enqueue(new Callback<Test>() {
+            StudentService.studentService.Login(mail,pass).enqueue(new Callback<ResponseModelLogin>() {
                 @Override
-                public void onResponse(Call<Test> call, Response<Test> response) {
-                    Gson gson = new Gson();
-                    String result = gson.toJson(response.body().getMessage());
-                    Log.d("'TestResult'", String.valueOf(result));
-                }
+                public void onResponse(Call<ResponseModelLogin> call, Response<ResponseModelLogin> response) {
+                    if(response.isSuccessful()){
 
+                        ResponseModelLogin object = response.body();
+                        Functions.ShowToast(getApplicationContext(),"Login Success");
+                        Log.d("Login",model);
+                    }else{
+                        Functions.ShowToast(getApplicationContext(),"Authentication Failed");
+                    }
+                }
                 @Override
-                public void onFailure(Call<Test> call, Throwable t) {
-                    Log.d("'TestResultE'",t.toString());
+                public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
+                    Gson gson = new Gson();
+                    Log.d("Login",gson.toJson(t));
+                    Functions.ShowToast(getApplicationContext(),"Authentication Failed 2");
                 }
             });
         } else {

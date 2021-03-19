@@ -1,6 +1,6 @@
 package com.example.scientificresearch.Server.ApiService;
 
-import com.example.scientificresearch.Model.Student;
+import com.example.scientificresearch.Model.Login.ResponseModelLogin;
 import com.example.scientificresearch.Model.Test;
 import com.example.scientificresearch.Server.Config;
 import com.google.gson.Gson;
@@ -9,7 +9,10 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 public interface StudentService {
 
@@ -22,8 +25,10 @@ public interface StudentService {
             .build()
             .create(StudentService.class);
 
-    @GET("/student/students")
-    Call<Student> getAllStudent();
+
     @GET("/student/test")
     Call<Test> TestApi();
+    @FormUrlEncoded
+    @POST("/student/login")
+    Call<ResponseModelLogin> Login(@Field("email") String email,@Field("password") String pass);
 }

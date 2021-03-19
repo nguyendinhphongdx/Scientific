@@ -1,77 +1,47 @@
 package com.example.scientificresearch.Model.Subject;
 
+import java.time.OffsetDateTime;
+
 public class Subject {
-    private String name;
-    private int price;
-    private  int totalSession;
     private String description;
     private String status;
     private String type;
     private String unit;
+    private String id;
+    private String name;
+    private Long price;
+    private Long totalSession;
+    private OffsetDateTime createdAt;
+    private OffsetDateTime updatedAt;
+    private Long v;
 
-    public Subject(String name, int price, int totalSession, String description, String status, String type, String unit) {
-        this.name = name;
-        this.price = price;
-        this.totalSession = totalSession;
-        this.description = description;
-        this.status = status;
-        this.type = type;
-        this.unit = unit;
-    }
+    public String getDescription() { return description; }
+    public void setDescription(String value) { this.description = value; }
 
-    public String getName() {
-        return name;
-    }
+    public String getStatus() { return status; }
+    public void setStatus(String value) { this.status = value; }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    public String getType() { return type; }
+    public void setType(String value) { this.type = value; }
 
-    public int getPrice() {
-        return price;
-    }
+    public String getUnit() { return unit; }
+    public void setUnit(String value) { this.unit = value; }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    public String getID() { return id; }
+    public void setID(String value) { this.id = value; }
 
-    public int getTotalSession() {
-        return totalSession;
-    }
+    public String getName() { return name; }
+    public void setName(String value) { this.name = value; }
 
-    public void setTotalSession(int totalSession) {
-        this.totalSession = totalSession;
-    }
+    public Long getPrice() { return price; }
+    public void setPrice(Long value) { this.price = value; }
 
-    public String getDescription() {
-        return description;
-    }
+    public Long getTotalSession() { return totalSession; }
+    public void setTotalSession(Long value) { this.totalSession = value; }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public OffsetDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(OffsetDateTime value) { this.createdAt = value; }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
+    public OffsetDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(OffsetDateTime value) { this.updatedAt = value; }
 }

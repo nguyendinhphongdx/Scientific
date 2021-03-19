@@ -7,17 +7,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+
 import com.example.scientificresearch.Common.Functions;
 import com.example.scientificresearch.Model.Room;
 import com.example.scientificresearch.Model.Store;
-import com.example.scientificresearch.Model.User;
 import com.example.scientificresearch.R;
-import com.example.scientificresearch.ui.main.MainActivity;
-import com.example.scientificresearch.ui.room.RoomFragment;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddRoomActivity extends AppCompatActivity {
     ArrayList<Room> rooms = Store.getRoom();
