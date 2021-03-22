@@ -9,7 +9,7 @@
         app:layout_constraintTop_toTopOf="@id/txtNameCourse"
         app:layout_constraintBottom_toBottomOf="@id/txtClass"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/icon_book"
+        android:src="@drawable/ic_baseline_menu_book_24"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginTop="10dp"
