@@ -5,11 +5,18 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.scientificresearch.Adapter.CourseAdapter;
+import com.example.scientificresearch.Adapter.NotiAdapter;
+import com.example.scientificresearch.Model.Course;
+import com.example.scientificresearch.Model.Store;
 import com.example.scientificresearch.R;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
@@ -31,7 +38,11 @@ import java.util.List;
 
 public class HomeFragment extends Fragment {
     BarChart barChart;
-    private List<String> appNameList = null;
+    ProgressBar progressBar;
+    RecyclerView recycleCourse;
+    private  ArrayList<Course> courses = Store.getCourse();
+    CourseAdapter adapter;
+    private List<String> appNameList = new LinkedList<String>();
     public HomeFragment() {
     }
     @Override
@@ -39,22 +50,52 @@ public class HomeFragment extends Fragment {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.frag_home, container, false);
         setViews(view);
+        setUp();
         initData();
-//        setProcess();
         setListeners();
         return view;
     }
 
-    private void initData() {
-        appNameList.add("Dcm");
-        appNameList.add("Dcm");
-        appNameList.add("Dcm");
-        appNameList.add("Dcm");
+    private void setViews(View view) {
+        progressBar = view.findViewById(R.id.progressBar);
+        barChart =view.findViewById(R.id.chart);
+        recycleCourse = view.findViewById(R.id.recyclerCourse);
 
+    }
+    private void setUp() {
+        progressBar.setVisibility(View.GONE);
+        barChart.setNoDataText(getResources().getString(R.string.no_data));
+        adapter = new CourseAdapter(courses,getActivity());
+        recycleCourse.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recycleCourse.setLayoutManager(layoutManager);
+    }
+    private void setListeners() {
+    }
+    private void initData() {
+        initChart();
+        initRecycleCourse();
+    }
+
+    private void initRecycleCourse() {
 
     }
 
-    private void setProcess(ArrayList<Float> value) {
+    private void initChart() {
+        appNameList.add("Dcm");
+        appNameList.add("Dcm");
+        appNameList.add("Dcm");
+        appNameList.add("Dcm");
+        ArrayList<Float> appList = new ArrayList<Float>();
+        appList.add(0, (float) 7.8);
+        appList.add(1, (float) 8.0);
+        appList.add(2, (float) 7.6);
+        appList.add(3, (float) 9.5);
+        setBarChart(appList);
+    }
+
+
+    private void setBarChart(ArrayList<Float> value) {
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
         barChart.getDescription().setEnabled(false);
@@ -64,14 +105,12 @@ public class HomeFragment extends Fragment {
 //        barChart.setMaxVisibleValueCount(60);
         barChart.setVisibleXRangeMaximum(6);
         barChart.moveViewToX(10);
-
         // scaling can now only be done on x- and y-axis separately
         barChart.setPinchZoom(false);
 
         barChart.setDrawGridBackground(false);
         // barChart.setDrawYLabels(false)
         ValueFormatter xAxisFormatter = new DayAxisValueFormatter(barChart,appNameList);
-
         XAxis xAxis = barChart.getXAxis();
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
@@ -94,37 +133,23 @@ public class HomeFragment extends Fragment {
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
         l.setForm(Legend.LegendForm.SQUARE);
-        l.setFormSize(9f);
+        l.setFormSize(15f);
         l.setTextSize(11f);
-//        l.setXEntrySpace(4f);
-
+        l.setXEntrySpace(4f);
         setData(value);
     }
 
-    private void setListeners() {
-    }
-
-    private void setViews(View view) {
-        barChart =view.findViewById(R.id.barchart);
-        barChart.setNoDataText(getResources().getString(R.string.no_data));
-        appNameList = new LinkedList<String>();
-        String serialized = "hello";
-        ArrayList<Float> appList = new ArrayList<Float>();
-        appList.add(0, (float) 5.111);
-        appList.add(1, (float) 5.111);
-        appList.add(2, (float) 5.111);
-        appList.add(3, (float) 5.111);
-
-        setProcess(appList);
-    }
     private void setData(ArrayList<Float> values) {
+        ArrayList<String> course= new ArrayList<>();
+        course.add(0,"HTML");
+        course.add(1,"CSS");
+        course.add(2,"JAVASCRIPT");
+        course.add(3,"NODEJS");
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
-
         for (int i = 0; i < values.size(); i++) {
             float val = values.get(i);
             yVals1.add(new BarEntry(i, val));
         }
-
         BarDataSet set1 = new BarDataSet(yVals1,"LABEL");
 
         if (barChart.getData() != null &&
@@ -134,14 +159,13 @@ public class HomeFragment extends Fragment {
             barChart.getData().notifyDataChanged();
             barChart.notifyDataSetChanged();
         } else {
-
             set1.setDrawIcons(false);
             set1.setColors(ColorTemplate.COLORFUL_COLORS);
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
             dataSets.add(set1);
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
-            data.setBarWidth(0.2f);
+            data.setBarWidth(0.5f);
             barChart.setData(data);
             barChart.setVisibleXRangeMaximum(4.0f);
         }

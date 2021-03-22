@@ -1,16 +1,270 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:ignore="MissingClass"
-    android:padding="10dp"
-    >
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginLeft="8.0dip"
+    android:layout_marginRight="8.0dip"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barchart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+        app:layout_constraintStart_toStartOf="@+id/scrollView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0.0dip"
+        android:layout_height="0.0dip"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@id/constraintLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <ImageView
+                    android:id="@id/imageView2"
+                    android:layout_width="71dp"
+                    android:layout_height="70dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logoapp" />
+
+                <TextView
+                    android:id="@id/txtHoTen_TongQuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Nguyễn Đình Phong"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:textSize="20.0sp"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toRightOf="@id/imageView2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@id/txtLop_TongQuan"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Trung Tâm Học Liệu HOU"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView2"
+                    app:layout_constraintTop_toBottomOf="@id/txtHoTen_TongQuan" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@id/linearLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="3.0dip"
+                android:background="@android:color/holo_blue_dark"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@id/chart"
+                android:layout_width="fill_parent"
+                android:layout_height="180.0dip"
+                android:layout_marginTop="8.0dip"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="3.0dip"
+                android:background="@android:color/holo_blue_dark"
+                android:orientation="horizontal" />
+
+            <TextView
+                android:id="@id/txtNhanXet_TongQuan"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8.0dip"
+                android:gravity="center"
+                android:textColor="@android:color/holo_orange_dark"
+                android:textSize="16.0sp"
+                android:text="Điểm vẫn còn thấp. Hãy cố gắng lên !"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="3.0dip"
+                android:background="@android:color/holo_blue_dark"
+                android:orientation="horizontal" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCourse"
+                android:layout_width="match_parent"
+                android:layout_height="200.0dip" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="3.0dip"
+                android:background="@android:color/holo_blue_dark"
+                android:orientation="horizontal" />
+<!--            <com.github.mikephil.charting.charts.LineChart-->
+<!--                android:id="@id/lineChart"-->
+<!--                android:layout_width="fill_parent"-->
+<!--                android:layout_height="200.0dip"-->
+<!--                android:layout_marginTop="8.0dip"-->
+<!--                app:layout_constraintLeft_toLeftOf="parent"-->
+<!--                app:layout_constraintRight_toRightOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/txtNhanXet_TongQuan" />-->
+<!--           -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="fill_parent"
+                android:layout_height="70.0dip"
+                android:layout_marginTop="8.0dip">
+
+                <LinearLayout
+                    android:id="@id/linearLayout3"
+                    android:layout_width="0.0dip"
+                    android:layout_height="3.0dip"
+                    android:layout_marginTop="60.0dip"
+                    android:background="@android:color/holo_blue_dark"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+
+                <LinearLayout
+                    android:id="@id/linearLayout2"
+                    android:layout_width="0.0dip"
+                    android:layout_height="3.0dip"
+                    android:layout_marginTop="0.0dip"
+                    android:background="@android:color/holo_blue_dark"
+                    android:orientation="horizontal"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@id/txtTinChiNo_TongQuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4.0dip"
+                    android:layout_marginRight="16.0dip"
+                    android:text="12.000.000"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="16.0sp"
+                    app:layout_constraintRight_toLeftOf="@id/linearLayout5"
+                    app:layout_constraintTop_toBottomOf="@id/txtTInChiTichLuy_TongQuan" />
+
+                <TextView
+                    android:id="@id/txtTInChiTichLuy_TongQuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8.0dip"
+                    android:layout_marginRight="16.0dip"
+                    android:text="10"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:textSize="16.0sp"
+                    app:layout_constraintRight_toLeftOf="@id/linearLayout5"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+
+                <TextView
+                    android:id="@id/txtCPA_TongQuan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:layout_marginRight="8.0dip"
+                    android:layout_marginBottom="8.0dip"
+                    android:text="7.8"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="36.0sp"
+                    app:layout_constraintBottom_toTopOf="@id/linearLayout3"
+                    app:layout_constraintLeft_toRightOf="@id/linearLayout5"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@id/textView7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:layout_marginTop="4.0dip"
+                    android:layout_marginBottom="8.0dip"
+                    android:text="Total Price"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="16.0sp"
+                    app:layout_constraintLeft_toLeftOf="@id/linearLayout2"
+                    app:layout_constraintTop_toBottomOf="@id/textView6" />
+
+                <TextView
+                    android:id="@id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:text="Total Course"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="16.0sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+
+                <LinearLayout
+                    android:id="@id/linearLayout5"
+                    android:layout_width="3.0dip"
+                    android:layout_height="60.0dip"
+                    android:layout_marginRight="120.0dip"
+                    android:background="@android:color/holo_blue_dark"
+                    android:orientation="vertical"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:ignore="MissingClass"-->
+<!--    android:padding="10dp"-->
+<!--    >-->
+
+<!--    <com.github.mikephil.charting.charts.BarChart-->
+<!--        android:id="@+id/barchart"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"/>-->
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

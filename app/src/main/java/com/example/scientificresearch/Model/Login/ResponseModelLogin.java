@@ -4,7 +4,6 @@ public class ResponseModelLogin {
     private String message;
     private Long totalResult;
     private Login[] data;
-
     public String getMessage() { return message; }
     public void setMessage(String value) { this.message = value; }
 

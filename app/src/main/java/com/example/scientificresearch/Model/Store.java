@@ -8,11 +8,8 @@ import java.util.List;
 public class Store {
     public static ArrayList<Room> rooms = new ArrayList<>();
     public static ArrayList<History> histories = new ArrayList<>();
+    public static ArrayList<Course> Course = new ArrayList<>();
     public static ArrayList<Room> getRoom(){
-//        List<User> list = new ArrayList<>();
-//        for(int i=0;i<5;i++){
-//            list.add(new User("id_"+i,"user"+i,"1234","gmail"+i+"@bkav.com","phone"+i,new User.imageClass("ảnh"+i,"url"+i)));
-//        }
         for(int i=0;i<50;i++){
             rooms.add(new Room("_id"+i,"Lớp "+i));
         }
@@ -25,5 +22,11 @@ public class Store {
             histories.add(new History("_id"+i,date.getTime(),"lịch sử "+i+""));
         }
         return histories;
+    }
+    public static ArrayList<Course> getCourse(){
+        for(int i=0;i<10;i++){
+            Course.add(new Course(i+"","Name"+i+"","Class"+i+"", (float) 7.8));
+        }
+        return Course;
     }
 }

@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">TeamWork</string>
-
+    <string name="app_name">Education HOU</string>
     <string name="drawer_open" translatable="false">OPEN</string>
     <string name="drawer_close" translatable="false">CLOSE</string>
 
@@ -85,4 +84,6 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="so_tin_chi_no" />
+    <string name="so_tin_chi_tich_luy" />
 </resources>

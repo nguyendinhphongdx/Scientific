@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="progressBar" type="id" />
+    <item name="scrollView2" type="id" />
+    <item name="constraintLayout" type="id" />
+    <item name="txtHoTen_TongQuan" type="id" />
+    <item name="txtLop_TongQuan" type="id" />
+    <item name="linearLayout" type="id" />
+    <item name="chart" type="id" />
+    <item name="txtNhanXet_TongQuan" type="id" />
+    <item name="lineChart" type="id" />
+    <item name="linearLayout2" type="id" />
+    <item name="linearLayout3" type="id" />
+    <item name="txtTinChiNo_TongQuan" type="id" />
+    <item name="txtTInChiTichLuy_TongQuan" type="id" />
+    <item name="linearLayout5" type="id" />
+    <item name="txtCPA_TongQuan" type="id" />
+    <item name="textView7" type="id" />
+    <item name="textView6" type="id" />
+</resources>

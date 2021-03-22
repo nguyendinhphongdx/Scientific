@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentContainerView frm_main;
     Boolean isClickedFab = false;
     ArrayList<Fragment> fragments = new ArrayList<>();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setUp() {
+        fabAdd.setVisibility(View.GONE);
         setPositionCslFab();
         setUpFragment();
     }
@@ -104,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.navBottomHome:
                         setVisibleToolBar(true);
-                        setVisibleFab(true);
+                        setVisibleFab(false);
                         switchFragment(0); break;
                     case R.id.navBottomRoom:
                         setVisibleToolBar(true);

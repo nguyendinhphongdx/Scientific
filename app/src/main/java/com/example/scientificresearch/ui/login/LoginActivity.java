@@ -79,29 +79,33 @@ public class LoginActivity extends AppCompatActivity {
         String pass = "123456";
         Boolean info = true;
         ToastMessage(info.toString());
-        if(info){
-            StudentService.studentService.Login(mail,pass).enqueue(new Callback<ResponseModelLogin>() {
-                @Override
-                public void onResponse(Call<ResponseModelLogin> call, Response<ResponseModelLogin> response) {
-                    if(response.isSuccessful()){
-
-                        ResponseModelLogin object = response.body();
-                        Functions.ShowToast(getApplicationContext(),"Login Success");
-                        Log.d("Login",model);
-                    }else{
-                        Functions.ShowToast(getApplicationContext(),"Authentication Failed");
-                    }
-                }
-                @Override
-                public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
-                    Gson gson = new Gson();
-                    Log.d("Login",gson.toJson(t));
-                    Functions.ShowToast(getApplicationContext(),"Authentication Failed 2");
-                }
-            });
-        } else {
-            ToastMessage("Authenticated Failed !!");
-        }
+                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                        startActivity(intent);
+//        if(info){
+//            StudentService.studentService.Login(mail.toString(),pass.toString()).enqueue(new Callback<ResponseModelLogin>() {
+//                @Override
+//                public void onResponse(Call<ResponseModelLogin> call, Response<ResponseModelLogin> response) {
+//                    if(response.isSuccessful()){
+////                        ResponseModelLogin object = response.body();
+//                        Functions.ShowToast(getApplicationContext(),"Login Success");
+////                        Log.d("Login",new Gson().toJson(response.body()));
+//                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//                        startActivity(intent);
+//                    }else{
+//
+//                        Functions.ShowToast(getApplicationContext(),"Authentication Failed");
+//                    }
+//                }
+//                @Override
+//                public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
+//                    Gson gson = new Gson();
+//                    Log.d("Login",gson.toJson(t));
+//                    Functions.ShowToast(getApplicationContext(),"Authentication Failed 2");
+//                }
+//            });
+//        } else {
+//            ToastMessage("Authenticated Failed !!");
+//        }
     }
     private void ToastMessage(String message) {
         Toast.makeText(LoginActivity.this,message ,Toast.LENGTH_SHORT).show();
