@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ManageWork</string>
+    <string name="app_name">Education HOU</string>
     <string name="drawer_open" translatable="false">Mở</string>
     <string name="drawer_close" translatable="false">Đóng</string>
     <string name="alert_ok" translatable="false">Đồng ý</string>
