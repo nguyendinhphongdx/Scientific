@@ -1,19 +1,61 @@
 package com.example.scientificresearch.Model.Subject;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.time.OffsetDateTime;
 
 public class Subject {
+    @SerializedName("description")
+    @Expose
     private String description;
+    @SerializedName("status")
+    @Expose
     private String status;
+    @SerializedName("type")
+    @Expose
     private String type;
+    @SerializedName("unit")
+    @Expose
     private String unit;
+    @SerializedName("id")
+    @Expose
     private String id;
+    @SerializedName("name")
+    @Expose
     private String name;
+    @SerializedName("price")
+    @Expose
     private Long price;
+    @SerializedName("totalSession")
+    @Expose
     private Long totalSession;
+    @SerializedName("createdAt")
+    @Expose
     private OffsetDateTime createdAt;
+    @SerializedName("updatedAt")
+    @Expose
     private OffsetDateTime updatedAt;
+    @SerializedName("v")
+    @Expose
     private Long v;
+
+    public Subject() {
+    }
+
+    public Subject(String description, String status, String type, String unit, String id, String name, Long price, Long totalSession, OffsetDateTime createdAt, OffsetDateTime updatedAt, Long v) {
+        this.description = description;
+        this.status = status;
+        this.type = type;
+        this.unit = unit;
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.totalSession = totalSession;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.v = v;
+    }
 
     public String getDescription() { return description; }
     public void setDescription(String value) { this.description = value; }
