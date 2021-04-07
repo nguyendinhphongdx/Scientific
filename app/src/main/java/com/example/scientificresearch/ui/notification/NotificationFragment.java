@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,12 +23,21 @@ import com.example.scientificresearch.Model.Schedule.Schedule;
 import com.example.scientificresearch.Model.Store;
 import com.example.scientificresearch.R;
 import com.example.scientificresearch.Server.ApiService.StudentService;
+import com.example.scientificresearch.Server.Config;
+import com.example.scientificresearch.Server.Socket.io.SocketConnect;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,6 +50,15 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
     TimePickerDialog tpd;
     List<Schedule> schedules = new ArrayList<>();
     Boolean isStart= true;
+    TextView txtArrow;
+    public static Socket mSocklet;
+    {
+        try {
+            mSocklet = IO.socket(Config.url);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
     public NotificationFragment() {
 
     }
@@ -84,6 +104,7 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
         recyclerView = view.findViewById(R.id.recyclerNoti);
         startDate = view.findViewById(R.id.start_date);
         endDate = view.findViewById(R.id.end_date);
+        txtArrow = view.findViewById(R.id.txtArrow);
     }
 
     private void setUp() {
@@ -91,6 +112,8 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        SocketConnect.mSocklet.on("receive_data",onNewNotification);
+        //mSocklet.on("receive_data",onNewNotification);
     }
     private void setListener() {
         startDate.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +128,13 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
             public void onClick(View v) {
                 isStart = false;
                 openDialogDate();
+            }
+        });
+        txtArrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("SOCKET IO","emmitting...");
+                SocketConnect.mSocklet.emit("from_mobile","hello server");
             }
         });
     }
@@ -138,7 +168,6 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
         }else{
             endDate.setText(dayOfMonth+"/"+(++monthOfYear)+"/"+year);
         }
-
         dpd = null;
         Calendar now = Calendar.getInstance();
         if (tpd == null) {
@@ -173,8 +202,24 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
             String date = endDate.getText().toString();
             endDate.setText(date+" - "+hourString+":"+minuteString+"'");
         }
-
         tpd = null;
     }
+    private Emitter.Listener onNewNotification = new Emitter.Listener() {
+        @Override
+        public void call(Object... args) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    JSONObject result = (JSONObject) args[0];
+                    Log.d("SOCKET IO",String.valueOf(result));
+                    try {
+                        Toast.makeText(getActivity(),result.getString("_class")+" thông báo : "+result.getString("des"),Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+    };
 }
 
