@@ -1,6 +1,9 @@
 package com.example.scientificresearch.Server.ApiService;
 
+import com.example.scientificresearch.Model.Class.ResponseModelClass;
 import com.example.scientificresearch.Model.Login.ResponseModelLogin;
+import com.example.scientificresearch.Model.Schedule.ResponseModalSchedule;
+import com.example.scientificresearch.Model.Subject.ResponseModelSubject;
 import com.example.scientificresearch.Model.Test;
 import com.example.scientificresearch.Server.Config;
 import com.google.gson.Gson;
@@ -15,7 +18,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface StudentService {
-
     Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
@@ -25,10 +27,21 @@ public interface StudentService {
             .build()
             .create(StudentService.class);
 
-
     @GET("/student/test")
     Call<Test> TestApi();
     @FormUrlEncoded
-    @POST("/student/login")
+    @POST("/mobile/login")
     Call<ResponseModelLogin> Login(@Field("email") String email,@Field("password") String pass);
+
+    @FormUrlEncoded
+    @POST("/mobile/get_all_subject")
+    Call<ResponseModelSubject> getAllSubject(@Field("_id") String id);
+
+    @FormUrlEncoded
+    @POST("/mobile/get_all_class")
+    Call<ResponseModelClass> getAllClass(@Field("_id") String id);
+
+    @FormUrlEncoded
+    @POST("/mobile/get_all_schedule")
+    Call<ResponseModalSchedule> getAllSchedule(@Field("_id") String id);
 }

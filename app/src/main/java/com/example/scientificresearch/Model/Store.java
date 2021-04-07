@@ -1,20 +1,22 @@
 package com.example.scientificresearch.Model;
 
-import java.sql.Timestamp;
+import com.example.scientificresearch.Model.Class.Class;
+import com.example.scientificresearch.Model.Schedule.Schedule;
+import com.example.scientificresearch.Model.Student.Student;
+import com.example.scientificresearch.Model.Subject.Subject;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
 public class Store {
-    public static ArrayList<Room> rooms = new ArrayList<>();
+    public static Student currentUser;
+    public static List<Class> classes= new ArrayList<>();
     public static ArrayList<History> histories = new ArrayList<>();
     public static ArrayList<Course> Course = new ArrayList<>();
-    public static ArrayList<Room> getRoom(){
-        for(int i=0;i<50;i++){
-            rooms.add(new Room("_id"+i,"Lớp "+i));
-        }
-        return rooms;
-    }
+    public static List<Subject> subjects = new ArrayList<>();
+    public static List<Schedule> schedules = new ArrayList<>();
     public static ArrayList<History> getHistories(){
 //        User.imageClass image = new User.imageClass("name","url");
         Date date = new Date();
@@ -29,4 +31,32 @@ public class Store {
         }
         return Course;
     }
+    public static List<Subject> getSubject(){
+        return subjects;
+    }
+    public static void setSubject(List<Subject> x){
+        subjects = x;
+    }
+    public static void setCurrentUser(Student student){
+         currentUser = student;
+    }
+    public static Student getCurentUser(){
+        return currentUser;
+    }
+    public static void setClasses(List<Class> ds){
+        classes = ds;
+    }
+    public static List<Class> getClasses(){
+        return classes;
+    }
+
+    public static void setSchedules(List<Schedule> ds){
+        schedules = ds;
+    }
+    public static List<Schedule> getSchedules(){
+        return schedules;
+    }
+
+
+
 }

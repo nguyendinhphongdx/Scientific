@@ -98,4 +98,12 @@ dependencies {
        // testRuntime("org.junit.vintage:junit-vintage-engine:4.12.0")
     // chart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    // Material Date time picker
+    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
+    // picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    // socket io
+    implementation ('io.socket:socket.io-client:2.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 }

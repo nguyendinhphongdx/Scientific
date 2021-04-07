@@ -1,11 +1,13 @@
 package com.example.scientificresearch.ui.home;
 
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +16,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scientificresearch.Adapter.CourseAdapter;
-import com.example.scientificresearch.Adapter.NotiAdapter;
-import com.example.scientificresearch.Model.Course;
 import com.example.scientificresearch.Model.Store;
+import com.example.scientificresearch.Model.Subject.ResponseModelSubject;
+import com.example.scientificresearch.Model.Subject.Subject;
 import com.example.scientificresearch.R;
+import com.example.scientificresearch.Server.ApiService.StudentService;
+import com.example.scientificresearch.utils.ConvertData;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
@@ -25,47 +29,91 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomeFragment extends Fragment {
     BarChart barChart;
     ProgressBar progressBar;
     RecyclerView recycleCourse;
-    private  ArrayList<Course> courses = Store.getCourse();
+    TextView txtTotalPrice;
+    TextView txtTotalCourse;
+    TextView txtAvg;
+    TextView txtHoTen_TongQuan;
+    private  List<Subject> subjects= new ArrayList<>();
     CourseAdapter adapter;
     private List<String> appNameList = new LinkedList<String>();
+    ArrayList<Float> appList = new ArrayList<Float>();
+    private String _id = Store.getCurentUser().getID();
     public HomeFragment() {
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.frag_home, container, false);
-        setViews(view);
-        setUp();
-        initData();
-        setListeners();
+        callApi(view);
         return view;
+    }
+
+    private void callApi(View view) {
+        getAllSubject(view);
+    }
+
+    private void getAllSubject(View view) {
+        StudentService.studentService.getAllSubject(_id).enqueue(new Callback<ResponseModelSubject>() {
+            @Override
+            public void onResponse(Call<ResponseModelSubject> call, Response<ResponseModelSubject> response) {
+                if(response.isSuccessful()){
+                    List<Subject> listSubject = response.body().getData();
+                    Store.setSubject(listSubject);
+                    subjects = listSubject;
+                    setViews(view);
+                    setUp();
+                    initData();
+                    setListeners();
+                    Log.d("HOME >>>", "onResponse:  "+response.message());
+                }else{
+                    Log.d("HOME >>>", "onResponse:  error");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseModelSubject> call, Throwable t) {
+                Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void setViews(View view) {
         progressBar = view.findViewById(R.id.progressBar);
         barChart =view.findViewById(R.id.chart);
         recycleCourse = view.findViewById(R.id.recyclerCourse);
-
+        txtTotalPrice = view.findViewById(R.id.txtTotalPrice);
+        txtTotalCourse = view.findViewById(R.id.txtTotalCourse);
+        txtAvg = view.findViewById(R.id.txtAvg);
+        txtHoTen_TongQuan = view.findViewById(R.id.txtHoTen_TongQuan);
     }
     private void setUp() {
         progressBar.setVisibility(View.GONE);
         barChart.setNoDataText(getResources().getString(R.string.no_data));
-        adapter = new CourseAdapter(courses,getActivity());
+        adapter = new CourseAdapter(subjects,getActivity());
         recycleCourse.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         recycleCourse.setLayoutManager(layoutManager);
@@ -75,6 +123,10 @@ public class HomeFragment extends Fragment {
     private void initData() {
         initChart();
         initRecycleCourse();
+        txtTotalPrice.setText(ConvertData.totalPrice(subjects)+"");
+        txtTotalCourse.setText(subjects.size()+"");
+        txtAvg.setText(ConvertData.avgMark(subjects)+"");
+        txtHoTen_TongQuan.setText(Store.getCurentUser().getName());
     }
 
     private void initRecycleCourse() {
@@ -86,16 +138,15 @@ public class HomeFragment extends Fragment {
         appNameList.add("Dcm");
         appNameList.add("Dcm");
         appNameList.add("Dcm");
-        ArrayList<Float> appList = new ArrayList<Float>();
         appList.add(0, (float) 7.8);
         appList.add(1, (float) 8.0);
         appList.add(2, (float) 7.6);
         appList.add(3, (float) 9.5);
-        setBarChart(appList);
+        setBarChart(subjects);
     }
 
 
-    private void setBarChart(ArrayList<Float> value) {
+    private void setBarChart(List<Subject> value) {
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
         barChart.getDescription().setEnabled(false);
@@ -139,21 +190,14 @@ public class HomeFragment extends Fragment {
         setData(value);
     }
 
-    private void setData(ArrayList<Float> values) {
-        ArrayList<String> course= new ArrayList<>();
-        course.add(0,"HTML");
-        course.add(1,"CSS");
-        course.add(2,"JAVASCRIPT");
-        course.add(3,"NODEJS");
+    private void setData(List<Subject> values) {
         ArrayList<BarEntry> yVals1 = new ArrayList<BarEntry>();
         for (int i = 0; i < values.size(); i++) {
-            float val = values.get(i);
-            yVals1.add(new BarEntry(i, val));
+            float val = Float.parseFloat(values.get(i).getMark());
+            yVals1.add(new BarEntry(i+1, val));
         }
         BarDataSet set1 = new BarDataSet(yVals1,"LABEL");
-
-        if (barChart.getData() != null &&
-                barChart.getData().getDataSetCount() > 0) {
+        if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
             set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
             set1.setValues(yVals1);
             barChart.getData().notifyDataChanged();
@@ -170,5 +214,4 @@ public class HomeFragment extends Fragment {
             barChart.setVisibleXRangeMaximum(4.0f);
         }
     }
-
 }

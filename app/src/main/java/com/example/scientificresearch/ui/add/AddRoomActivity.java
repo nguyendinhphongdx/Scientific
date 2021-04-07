@@ -5,18 +5,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.scientificresearch.Common.Functions;
-import com.example.scientificresearch.Model.Room;
+import com.example.scientificresearch.Model.Class.Class;
 import com.example.scientificresearch.Model.Store;
 import com.example.scientificresearch.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class AddRoomActivity extends AppCompatActivity {
-    ArrayList<Room> rooms = Store.getRoom();
+    List<Class> classes = Store.getClasses();
     ImageView imgCancel,imgAdd;
     EditText edtName;
     @Override
@@ -50,8 +51,7 @@ public class AddRoomActivity extends AppCompatActivity {
                 if(edtName.getText().length()==0){
                     Functions.ShowToast(getApplicationContext(),"Vui lòng không để trống tên phòng!");
                 }else{
-                    Log.d("TAG", "onClick: "+rooms.size()+"");
-                    rooms.add(new Room("id_new", edtName.getText().toString()));
+                    Log.d("TAG", "onClick: "+classes.size()+"");
                     Functions.ShowToast(getApplicationContext(),"Thêm phòng thành công!");
                     finish();
                 }

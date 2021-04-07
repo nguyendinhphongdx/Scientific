@@ -10,18 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scientificresearch.Common.Functions;
-import com.example.scientificresearch.Model.Course;
-import com.example.scientificresearch.Model.History;
+import com.example.scientificresearch.Model.Subject.Subject;
 import com.example.scientificresearch.R;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder> {
-    private List<Course> listCourse;
+    private List<Subject> listCourse;
     private Context mContext;
-    public CourseAdapter(List<Course> ListCourse, Context mContext) {
+    public CourseAdapter(List<Subject> ListCourse, Context mContext) {
         this.listCourse = ListCourse;
         this.mContext = mContext;
     }
@@ -37,7 +34,7 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Course course = listCourse.get(position);
+        Subject course = listCourse.get(position);
         holder.txtNameCourse.setText(course.getName());
         holder.txtClass.setText(course.getClassName());
         holder.txtMark.setText(course.getMark()+"");

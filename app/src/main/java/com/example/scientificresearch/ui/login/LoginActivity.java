@@ -12,18 +12,17 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.scientificresearch.Common.Functions;
 import com.example.scientificresearch.Model.Login.ResponseModelLogin;
-import com.example.scientificresearch.Model.Test;
 import com.example.scientificresearch.R;
 import com.example.scientificresearch.Server.ApiService.StudentService;
+import com.example.scientificresearch.Server.Socket.io.SocketConnect;
 import com.example.scientificresearch.ui.main.MainActivity;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.scientificresearch.Model.Store.setCurrentUser;
 
 public class LoginActivity extends AppCompatActivity {
     TextView edtMail, edtPass, edtUsername, tvSuggess;
@@ -31,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     RelativeLayout rlUsername;
     View viewLine;
     Boolean isLogin = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         setViews();
         setUp();
         setListeners();
-
     }
 
     private void setListeners() {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastMessage("Login ..."+ edtMail.getText() + edtPass.getText());
                 login();
             }
         });
@@ -58,8 +56,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void setUp() {
         if(isLogin){
@@ -75,37 +71,36 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     private void login() {
-        String mail = "phongnguyendx@gmail.com";
-        String pass = "123456";
+        String mail = edtMail.getText().toString();
+        String pass = edtPass.getText().toString();
+        Log.d("Info",mail+pass);
         Boolean info = true;
-        ToastMessage(info.toString());
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+        if(info){
+            StudentService.studentService.Login(mail,pass).enqueue(new Callback<ResponseModelLogin>() {
+                @Override
+                public void onResponse(Call<ResponseModelLogin> call, Response<ResponseModelLogin> response) {
+                    if(response.isSuccessful()){
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
-//        if(info){
-//            StudentService.studentService.Login(mail.toString(),pass.toString()).enqueue(new Callback<ResponseModelLogin>() {
-//                @Override
-//                public void onResponse(Call<ResponseModelLogin> call, Response<ResponseModelLogin> response) {
-//                    if(response.isSuccessful()){
-////                        ResponseModelLogin object = response.body();
-//                        Functions.ShowToast(getApplicationContext(),"Login Success");
-////                        Log.d("Login",new Gson().toJson(response.body()));
-//                        Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-//                        startActivity(intent);
-//                    }else{
-//
-//                        Functions.ShowToast(getApplicationContext(),"Authentication Failed");
-//                    }
-//                }
-//                @Override
-//                public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
-//                    Gson gson = new Gson();
-//                    Log.d("Login",gson.toJson(t));
-//                    Functions.ShowToast(getApplicationContext(),"Authentication Failed 2");
-//                }
-//            });
-//        } else {
-//            ToastMessage("Authenticated Failed !!");
-//        }
+                        SocketConnect.getInstance().Connect();
+//                        SocketConnect.mSocklet.connect();
+                        Log.d("Login",response.body().getMessage());
+                        setCurrentUser(response.body().getData());
+                        ToastMessage(response.body().getMessage());
+                    }else{
+                        Log.d("Login",response.raw().toString());
+                        ToastMessage(response.message());
+                    }
+                }
+                @Override
+                public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
+                    ToastMessage("Authenticated Failed !!");
+                    Log.d("Login",t.toString());
+                }
+            });
+        } else {
+            ToastMessage("Info not Empty!!");
+        }
     }
     private void ToastMessage(String message) {
         Toast.makeText(LoginActivity.this,message ,Toast.LENGTH_SHORT).show();

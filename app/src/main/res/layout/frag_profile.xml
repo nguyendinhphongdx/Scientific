@@ -116,6 +116,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/proximanovaregular"
+                        android:textAlignment="center"
                         android:text="123455676254323131313"
                         android:textSize="14sp" />
 
@@ -152,12 +153,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/group"
+                                android:text="Class"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
 
                             <TextView
-                                android:id="@+id/tvTotalGroup"
+                                android:id="@+id/txtTotalClass"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
@@ -178,7 +179,7 @@
                             android:layout_height="35dp"
                             android:background="@drawable/circular_grey_bordersolid"
                             android:padding="10dp"
-                            android:src="@drawable/ic_room" />
+                            android:src="@drawable/ic_baseline_iso_24" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -189,12 +190,12 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="@string/room"
+                                android:text="Mark"
                                 android:textSize="12sp"
                                 android:textStyle="bold" />
-
+txtTotalMark
                             <TextView
-                                android:id="@+id/tvTotalRoom"
+                                android:id="@+id/txtMark"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
@@ -444,14 +445,14 @@
                                 android:layout_height="40dp"
                                 android:background="@drawable/circular_grey_bordersolid"
                                 android:padding="10dp"
-                                android:src="@drawable/ic_call_24dp" />
+                                android:src="@drawable/user" />
 
                             <EditText
-                                android:id="@+id/edtPhoneNumber"
+                                android:id="@+id/edtAge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="20dp"
-                                android:text="0989112136"
+                                android:text="20"
                                 android:textSize="15sp"
                                 android:textColor="@color/goodgrey"
                                 android:fontFamily="@font/proximanovaregular" />

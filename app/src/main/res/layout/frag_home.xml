@@ -173,7 +173,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@id/txtTinChiNo_TongQuan"
+                    android:id="@id/txtTotalPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4.0dip"
@@ -182,10 +182,10 @@
                     android:textColor="@android:color/holo_green_dark"
                     android:textSize="16.0sp"
                     app:layout_constraintRight_toLeftOf="@id/linearLayout5"
-                    app:layout_constraintTop_toBottomOf="@id/txtTInChiTichLuy_TongQuan" />
+                    app:layout_constraintTop_toBottomOf="@id/txtTotalCourse" />
 
                 <TextView
-                    android:id="@id/txtTInChiTichLuy_TongQuan"
+                    android:id="@id/txtTotalCourse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8.0dip"
@@ -197,7 +197,7 @@
                     app:layout_constraintTop_toBottomOf="@id/linearLayout2" />
 
                 <TextView
-                    android:id="@id/txtCPA_TongQuan"
+                    android:id="@id/txtAvg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8.0dip"

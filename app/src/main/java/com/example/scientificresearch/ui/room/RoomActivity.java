@@ -15,23 +15,22 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentContainerView;
 
 import com.example.scientificresearch.Common.Functions;
-import com.example.scientificresearch.Model.Room;
+import com.example.scientificresearch.Model.Class.Class;
 import com.example.scientificresearch.Model.Store;
 import com.example.scientificresearch.R;
-import com.example.scientificresearch.ui.main.MainActivity;
 import com.example.scientificresearch.ui.slider.MemberFragment;
 import com.example.scientificresearch.ui.slider.Slider_RoomFragment;
 import com.github.florent37.hollyviewpager.HollyViewPager;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class RoomActivity extends AppCompatActivity {
     TextView tvTitle;
     ImageView moreHor,imgBack;
     ConstraintLayout fabAdd;
     HollyViewPager hollyViewPager;
-    Room current_room;
-    ArrayList<Room> rooms = Store.getRoom();
+    Class current_room;
+    List<Class> rooms = Store.getClasses();
     DrawerLayout drawerTask;
     LinearLayout icSliderMember;
     TextView txtMember;
@@ -103,10 +102,10 @@ public class RoomActivity extends AppCompatActivity {
         frag_room_slider = findViewById(R.id.frag_room_slider);
 
     }
-    private Room queryCurrentRoom() {
+    private Class queryCurrentRoom() {
         String room_id =  getIntent().getStringExtra("room_id");
         for(int i=0;i<rooms.size();i++){
-            if(rooms.get(i).get_id().equals(room_id)){
+            if(rooms.get(i).getID().equals(room_id)){
                 return rooms.get(i);
             }
         }
