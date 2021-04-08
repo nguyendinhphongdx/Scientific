@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.scientificresearch.Model.Store;
@@ -36,6 +37,7 @@ public class ProfileFragment extends Fragment {
     EditText edtAge,edtCity,edtMail;
     List<Subject> subjects = Store.getSubject();
     CircularImageView img_profile;
+    ConstraintLayout progess_Pro;
     public ProfileFragment() {
     }
 
@@ -44,6 +46,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.frag_profile, container, false);
+        progess_Pro = view.findViewById(R.id.progess_Pro);
         callApi(view);
         return view;
     }
@@ -53,6 +56,7 @@ public class ProfileFragment extends Fragment {
     }
 
     private void getAllSubject(View view) {
+        progess_Pro.setVisibility(View.VISIBLE);
         StudentService.studentService.getAllSubject(Store.getCurentUser().getID()).enqueue(new Callback<ResponseModelSubject>() {
             @Override
             public void onResponse(Call<ResponseModelSubject> call, Response<ResponseModelSubject> response) {
@@ -67,11 +71,13 @@ public class ProfileFragment extends Fragment {
                 }else{
                     Log.d("HOME >>>", "onResponse:  error");
                 }
+                progess_Pro.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseModelSubject> call, Throwable t) {
                 Toast.makeText(getActivity(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                progess_Pro.setVisibility(View.GONE);
             }
         });
     }

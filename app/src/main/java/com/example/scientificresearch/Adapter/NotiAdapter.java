@@ -1,18 +1,22 @@
 package com.example.scientificresearch.Adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scientificresearch.Common.Functions;
 import com.example.scientificresearch.Model.Schedule.Schedule;
 import com.example.scientificresearch.R;
 
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class NotiAdapter  extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
@@ -33,14 +37,19 @@ public class NotiAdapter  extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
         return viewHolder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Schedule history = ListHistory.get(position);
         holder.tvInfo.setText(history.getSubject()+" - "+history.getTitle());
-//        Date date = new Date(history.getStartTime());
-//        String timeStamp = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(date);
+        ZonedDateTime d = ZonedDateTime.parse(history.getStartTime());
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = d.format(myFormatObj);
         holder.txtDate.setText(history.getDay());
-        holder.tvTimeNoti.setText(history.getStartTime());
+        holder.tvTimeNoti.setText(formattedDate);
+        if(history.getStatus()!=null){
+            holder.txtStatus.setText(history.getStatus());
+        }
     }
 
     @Override
@@ -53,12 +62,14 @@ public class NotiAdapter  extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
         public TextView tvInfo; 
         public TextView tvTimeNoti;
         public TextView txtDate;
+        public TextView txtStatus;
         public ViewHolder(View itemView) {
             super(itemView);
             itemview = itemView;
             tvInfo = itemView.findViewById(R.id.tvInfo);
             tvTimeNoti = itemView.findViewById(R.id.tvTimeNoti);
             txtDate = itemView.findViewById(R.id.txtDate);
+            txtStatus = itemView.findViewById(R.id.txtStatus);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

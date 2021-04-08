@@ -513,4 +513,11 @@ txtTotalMark
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <include
+        android:id="@+id/progess_Pro"
+        layout="@layout/progress_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

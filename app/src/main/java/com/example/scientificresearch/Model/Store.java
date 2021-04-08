@@ -1,5 +1,7 @@
 package com.example.scientificresearch.Model;
 
+import android.util.Log;
+
 import com.example.scientificresearch.Model.Class.Class;
 import com.example.scientificresearch.Model.Schedule.Schedule;
 import com.example.scientificresearch.Model.Student.Student;
@@ -57,6 +59,15 @@ public class Store {
         return schedules;
     }
 
+    public static List<String> getApplist(){
+        List<String> rs = new ArrayList<>();
+        rs.add("defaul");
+        for (int i = 0; i < subjects.size(); i++) {
+            Log.d("name",subjects.get(i).getClassName());
+            rs.add(i+1,subjects.get(i).getClassName());
+        }
+        return rs;
+    }
 
 
 }

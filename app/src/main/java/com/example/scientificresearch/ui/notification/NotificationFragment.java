@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +52,7 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
     List<Schedule> schedules = new ArrayList<>();
     Boolean isStart= true;
     TextView txtArrow;
+    ConstraintLayout progess_Notif;
     public static Socket mSocklet;
     {
         try {
@@ -67,15 +69,18 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.frag_notification, container, false);
+        progess_Notif = view.findViewById(R.id.progess_Notif);
         callApi(view);
         return view;
     }
 
     private void callApi(View view) {
+        progess_Notif.setVisibility(View.VISIBLE);
         StudentService.studentService.getAllSchedule(Store.getCurentUser().getID()).enqueue(new Callback<ResponseModalSchedule>() {
             @Override
             public void onResponse(Call<ResponseModalSchedule> call, Response<ResponseModalSchedule> response) {
                 if(response.isSuccessful()){
+
                     Log.d("SCHEDULE",response.body().getMessage());
                     Store.setSchedules(response.body().getData());
                     schedules= Store.getSchedules();
@@ -85,11 +90,13 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
                 }else{
                     Log.d("SCHEDULE","Error");
                 }
+                progess_Notif.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseModalSchedule> call, Throwable t) {
                 Log.d("SCHEDULE",t.getMessage());
+                progess_Notif.setVisibility(View.GONE);
             }
         });
     }
@@ -214,6 +221,14 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
                     Log.d("SOCKET IO",String.valueOf(result));
                     try {
                         Toast.makeText(getActivity(),result.getString("_class")+" thông báo : "+result.getString("des"),Toast.LENGTH_SHORT).show();
+                        int index = Functions.pushDataChange(result.getString("_class"),result.getString("start"));
+                        Log.d("INDEX =====>",String.valueOf(index));
+                        if(index!=-1){
+                            Log.d("BEFORE CHANGE DATAA =====>",String.valueOf(schedules.get(index).getStatus()));
+                            schedules = Functions.changeDataSocket(index,result.getString("des"));
+                            Log.d("AFTER CHANGE DATAA =====>",String.valueOf(schedules.get(index).getStatus()));
+                            updateRecycle(index,schedules);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -221,5 +236,9 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
             });
         }
     };
+    private void updateRecycle (int insertIndex,List<Schedule> ls){
+        schedules.addAll(ls);
+        adapter.notifyDataSetChanged();
+    }
 }
 

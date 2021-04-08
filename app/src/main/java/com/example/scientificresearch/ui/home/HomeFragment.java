@@ -29,12 +29,11 @@ import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,7 +51,6 @@ public class HomeFragment extends Fragment {
     TextView txtHoTen_TongQuan;
     private  List<Subject> subjects= new ArrayList<>();
     CourseAdapter adapter;
-    private List<String> appNameList = new LinkedList<String>();
     ArrayList<Float> appList = new ArrayList<Float>();
     private String _id = Store.getCurentUser().getID();
     public HomeFragment() {
@@ -134,10 +132,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void initChart() {
-        appNameList.add("Dcm");
-        appNameList.add("Dcm");
-        appNameList.add("Dcm");
-        appNameList.add("Dcm");
         appList.add(0, (float) 7.8);
         appList.add(1, (float) 8.0);
         appList.add(2, (float) 7.6);
@@ -161,13 +155,23 @@ public class HomeFragment extends Fragment {
 
         barChart.setDrawGridBackground(false);
         // barChart.setDrawYLabels(false)
-        ValueFormatter xAxisFormatter = new DayAxisValueFormatter(barChart,appNameList);
+        final String xVal[]={"Val1","Val2","Val3"};
+//        ValueFormatter xAxisFormatter = new ValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value) {
+//                return super.getFormattedValue(value);
+//            }
+//        }
         XAxis xAxis = barChart.getXAxis();
+//        xAxis.setValueFormatter(new IndexAxisValueFormatter(xVal));
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         xAxis.setDrawGridLines(false);
         xAxis.setGranularity(1f); // only intervals of 1 day
 //        xAxis.setLabelCount(appNameList.size());
-        xAxis.setValueFormatter(xAxisFormatter);
+//        xAxis.setValueFormatter(xAxisFormatter);
+        List<String> appNameList = Store.getApplist();
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(appNameList));
+
 
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setLabelCount(10, false);

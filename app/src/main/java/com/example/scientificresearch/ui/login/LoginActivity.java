@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.scientificresearch.Model.Login.ResponseModelLogin;
 import com.example.scientificresearch.R;
@@ -30,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     RelativeLayout rlUsername;
     View viewLine;
     Boolean isLogin = true;
-
+    ConstraintLayout skeleton;
+    Boolean isFetch= false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +73,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
     private void login() {
+        skeleton.setVisibility(View.VISIBLE);
         String mail = edtMail.getText().toString();
         String pass = edtPass.getText().toString();
         Log.d("Info",mail+pass);
@@ -91,16 +94,20 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("Login",response.raw().toString());
                         ToastMessage(response.message());
                     }
+                    skeleton.setVisibility(View.GONE);
                 }
                 @Override
                 public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
                     ToastMessage("Authenticated Failed !!");
                     Log.d("Login",t.toString());
+                    skeleton.setVisibility(View.GONE);
                 }
             });
         } else {
             ToastMessage("Info not Empty!!");
+            skeleton.setVisibility(View.GONE);
         }
+
     }
     private void ToastMessage(String message) {
         Toast.makeText(LoginActivity.this,message ,Toast.LENGTH_SHORT).show();
@@ -114,5 +121,6 @@ public class LoginActivity extends AppCompatActivity {
         rlUsername = findViewById(R.id.rlUsername);
         viewLine = findViewById(R.id.viewLine);
         tvSuggess = findViewById(R.id.tvSuggess);
+        skeleton = findViewById(R.id.cslProgress);
     }
 }

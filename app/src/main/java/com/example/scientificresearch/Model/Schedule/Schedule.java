@@ -13,11 +13,12 @@ public class Schedule {
     private String endTime;
     private String title;
     private Long type;
+    private String status;
 
     public Schedule() {
     }
 
-    public Schedule(Long id, String subject, String day, String startTime, String endTime, String title, Long type) {
+    public Schedule(Long id, String subject, String day, String startTime, String endTime, String title, Long type,String status) {
         this.id = id;
         this.subject = subject;
         this.day = day;
@@ -25,6 +26,7 @@ public class Schedule {
         this.endTime = endTime;
         this.title = title;
         this.type = type;
+        this.status = status;
     }
 
     public Long getId() {
@@ -81,5 +83,13 @@ public class Schedule {
 
     public void setType(Long type) {
         this.type = type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,7 @@ public class RoomFragment extends Fragment {
     RecyclerView recyclerView;
     RoomAdapter adapter;
     List<Class> rooms =  Store.getClasses();
+    ConstraintLayout progess_Class;
     public RoomFragment() {
     }
 
@@ -36,6 +38,7 @@ public class RoomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.frag_room, container, false);
+        progess_Class= view.findViewById(R.id.progess_Class);
         callApi(view);
         return view;
     }
@@ -45,6 +48,7 @@ public class RoomFragment extends Fragment {
     }
 
     private void getAllClass(View view) {
+        progess_Class.setVisibility(View.VISIBLE);
         StudentService.studentService.getAllClass(Store.getCurentUser().getID()).enqueue(new Callback<ResponseModelClass>() {
             @Override
             public void onResponse(Call<ResponseModelClass> call, Response<ResponseModelClass> response) {
@@ -58,11 +62,13 @@ public class RoomFragment extends Fragment {
                 }else{
                     Log.d("ROOM >>>", "onResponse:  "+response.message());
                 }
+                progess_Class.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<ResponseModelClass> call, Throwable t) {
                 Log.d("ROOM >>>", "onResponse:  "+t.getMessage());
+                progess_Class.setVisibility(View.GONE);
             }
         });
     }
@@ -85,5 +91,6 @@ public class RoomFragment extends Fragment {
 
     private void setView(View view) {
         recyclerView = view.findViewById(R.id.recyclerRoom);
+
     }
 }
