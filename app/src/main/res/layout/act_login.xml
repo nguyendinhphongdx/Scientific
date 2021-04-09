@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg">
+    android:background="@drawable/bh_schoool">
 
     <View
         android:layout_width="match_parent"
@@ -24,12 +24,14 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                style="Sap"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:src="@drawable/default_icon_app" />
-        </LinearLayout>
+        <de.hdodenhof.circleimageview.CircleImageView
+            style="Sap"
+            android:layout_marginTop="45dp"
+            android:layout_marginRight="20dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/logo" />
+    </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -223,7 +225,7 @@
                 android:background="@null"
                 android:backgroundTint="@null"
                 android:text="@string/sign_up"
-                android:textColor="#F83265"
+                android:textColor="#03A9F4"
                 android:textSize="16sp" />
 
         </LinearLayout>
