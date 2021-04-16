@@ -9,11 +9,11 @@
     <item
         android:id="@+id/navBottomRoom"
         android:icon="@drawable/ic_room"
-        android:title="@string/room" />
+        android:title="Classes" />
     <item
         android:id="@+id/navBottomNotifi"
         android:icon="@drawable/ic_notification"
-        android:title="@string/notifications" />
+        android:title="Schedules" />
     <item
         android:id="@+id/navBottomProfiles"
         android:icon="@drawable/ic_profiles"
