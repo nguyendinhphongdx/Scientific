@@ -113,11 +113,11 @@
 
                     <TextView
                         android:id="@+id/idUser"
-                        android:layout_width="wrap_content"
+                        android:layout_width="204dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/proximanovaregular"
-                        android:textAlignment="center"
                         android:text="123455676254323131313"
+                        android:textAlignment="center"
                         android:textSize="14sp" />
 
 

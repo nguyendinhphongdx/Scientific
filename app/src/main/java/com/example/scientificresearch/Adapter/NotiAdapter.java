@@ -2,6 +2,7 @@ package com.example.scientificresearch.Adapter;
 
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,6 @@ import com.example.scientificresearch.Common.Functions;
 import com.example.scientificresearch.Model.Schedule.Schedule;
 import com.example.scientificresearch.R;
 
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class NotiAdapter  extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
@@ -42,11 +41,12 @@ public class NotiAdapter  extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Schedule history = ListHistory.get(position);
         holder.tvInfo.setText(history.getSubject()+" - "+history.getTitle());
-        ZonedDateTime d = ZonedDateTime.parse(history.getStartTime());
-        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-        String formattedDate = d.format(myFormatObj);
+//        ZonedDateTime d = ZonedDateTime.parse(history.getStartTime());
+//        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+//        String formattedDate = d.format(myFormatObj);
+        Log.d("===> TIME",String.valueOf(history.getStartTime()));
         holder.txtDate.setText(history.getDay());
-        holder.tvTimeNoti.setText(formattedDate);
+        holder.tvTimeNoti.setText(history.getStartTime());
         if(history.getStatus()!=null){
             holder.txtStatus.setText(history.getStatus());
         }
@@ -73,7 +73,7 @@ public class NotiAdapter  extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Functions.ShowToast(v.getContext(),tvInfo.getText()+"");
+                    Functions.ShowToast(v.getContext(),tvTimeNoti.getText()+"");
                 }
             });
         }

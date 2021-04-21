@@ -221,7 +221,7 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
                     Log.d("SOCKET IO",String.valueOf(result));
                     try {
                         Toast.makeText(getActivity(),result.getString("_class")+" thông báo : "+result.getString("des"),Toast.LENGTH_SHORT).show();
-                        int index = Functions.pushDataChange(result.getString("_class"),result.getString("start"));
+                        int index = Functions.pushDataChange(result.getString("_class"),result.getString("convertStart"));
                         Log.d("INDEX =====>",String.valueOf(index));
                         if(index!=-1){
                             Log.d("BEFORE CHANGE DATAA =====>",String.valueOf(schedules.get(index).getStatus()));
@@ -237,7 +237,7 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
         }
     };
     private void updateRecycle (int insertIndex,List<Schedule> ls){
-        schedules.addAll(ls);
+        schedules = ls;
         adapter.notifyDataSetChanged();
     }
 }
