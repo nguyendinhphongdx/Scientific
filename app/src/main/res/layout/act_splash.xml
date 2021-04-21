@@ -19,7 +19,7 @@
 
     <TextView
         android:id="@+id/tvNameApp"
-        android:text="Education HOU"
+        android:text="Khoa Bảng Education"
         android:textSize="30sp"
         android:textColor="@color/colorPrimaryDarkTask"
         app:layout_constraintTop_toTopOf="parent"
