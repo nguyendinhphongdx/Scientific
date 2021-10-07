@@ -18,20 +18,20 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-    <LinearLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_weight="1"
             android:gravity="center">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            style="Sap"
-            android:layout_marginTop="45dp"
-            android:layout_marginRight="20dp"
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:src="@drawable/logo" />
-    </LinearLayout>
+            <de.hdodenhof.circleimageview.CircleImageView
+                style="Sap"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_marginTop="45dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/logo" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -188,6 +188,40 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="#fff" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                >
+
+                <CheckBox
+                    android:id="@+id/cbRemember"
+                    android:layout_width="30dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="0dp"
+                    android:textColor="@color/mdtp_white"
+                    android:backgroundTint="@color/accentGreen"
+                    android:text="CheckBox"
+                    android:visibility="visible"
+                    android:checked="true"
+                    />
+
+                <TextView
+                    android:layout_width="188dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="79dp"
+                    android:layout_toEndOf="@+id/cbRemember"
+                    android:text="Remember Account?"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    android:textFontWeight="700" />
+            </RelativeLayout>
         </LinearLayout>
 
         <Button

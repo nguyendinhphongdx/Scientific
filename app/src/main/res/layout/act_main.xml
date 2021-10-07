@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:fitsSystemWindows="true"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".Ui.main.MainActivity">
 
 
     <RelativeLayout
@@ -87,7 +87,7 @@
             android:id="@+id/frag_slider"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:name="com.example.scientificresearch.ui.slider.SliderFragment"
+            android:name="com.example.scientificresearch.Ui.slider.SliderFragment"
             tools:layout="@layout/frag_slider" />
 
     </com.google.android.material.navigation.NavigationView>

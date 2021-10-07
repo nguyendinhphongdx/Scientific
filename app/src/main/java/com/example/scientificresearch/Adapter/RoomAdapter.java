@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.scientificresearch.Model.Class.Class;
 import com.example.scientificresearch.R;
-import com.example.scientificresearch.ui.room.RoomActivity;
+import com.example.scientificresearch.Ui.room.RoomActivity;
 
 import java.util.List;
 
