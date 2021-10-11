@@ -240,7 +240,6 @@ public class NotificationFragment extends Fragment implements DatePickerDialog.O
         }
     };
     private void updateRecycle (int insertIndex,List<Schedule> ls){
-
         schedules = ls;
         adapter.notifyDataSetChanged();
     }

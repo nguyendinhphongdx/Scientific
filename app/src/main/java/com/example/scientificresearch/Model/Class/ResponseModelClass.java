@@ -15,5 +15,4 @@ public class ResponseModelClass {
 
     public List<Class> getData() { return data; }
     public void setData(List<Class> value) { this.data = value; }
-
 }

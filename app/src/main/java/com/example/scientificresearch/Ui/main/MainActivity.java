@@ -32,6 +32,7 @@ package com.example.scientificresearch.Ui.main;
         import com.example.scientificresearch.Ui.home.HomeFragment;
         import com.example.scientificresearch.Ui.notification.NotificationFragment;
         import com.example.scientificresearch.Ui.profile.ProfileFragment;
+        import com.example.scientificresearch.Ui.room.RoomActivity;
         import com.example.scientificresearch.Ui.room.RoomFragment;
         import com.example.scientificresearch.utils.ConvertData;
         import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -107,6 +108,8 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("ReceiveMessage",messageReceive.message.message + " from "+ messageReceive.message.displayName);
                     Toast.makeText(MainActivity.this,messageReceive.message.message + " from "+ messageReceive.message.displayName,Toast.LENGTH_SHORT).show();
                     SetUpNotify.createLocalNotification(messageReceive.message.displayName,messageReceive.message.message,MainActivity.this);
+                    RoomActivity.addMessageFromMainASocket(messageReceive.message);
+
                 }
             });
         }

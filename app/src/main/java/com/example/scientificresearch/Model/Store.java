@@ -19,6 +19,8 @@ public class Store {
     public static ArrayList<Course> Course = new ArrayList<>();
     public static List<Subject> subjects = new ArrayList<>();
     public static List<Schedule> schedules = new ArrayList<>();
+    public static Class classSelected = null;
+
     public static ArrayList<History> getHistories(){
 //        User.imageClass image = new User.imageClass("name","url");
         Date date = new Date();
@@ -51,14 +53,12 @@ public class Store {
     public static List<Class> getClasses(){
         return classes;
     }
-
     public static void setSchedules(List<Schedule> ds){
         schedules = ds;
     }
     public static List<Schedule> getSchedules(){
         return schedules;
     }
-
     public static List<String> getApplist(){
         List<String> rs = new ArrayList<>();
         rs.add("defaul");
@@ -69,5 +69,15 @@ public class Store {
         return rs;
     }
 
+    public static Class getClassSelected() {
+        return classSelected;
+    }
+    public static void setClassSelected(Class classSelected) {
+        Store.classSelected = classSelected;
+    }
+
+    private class ClassSelected {
+
+    }
 
 }

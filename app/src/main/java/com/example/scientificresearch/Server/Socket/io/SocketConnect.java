@@ -2,9 +2,13 @@ package com.example.scientificresearch.Server.Socket.io;
 
 import android.util.Log;
 
+import com.example.scientificresearch.Model.Message.Message;
+import com.example.scientificresearch.Model.Message.MessageReceive;
 import com.example.scientificresearch.Model.Store;
 import com.example.scientificresearch.Server.Config;
+import com.google.gson.JsonObject;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URI;
@@ -34,5 +38,22 @@ public class SocketConnect {
     public  void Connect(){
         Log.d("Socket","is connecting ...");
         mSocklet.connect();
+    }
+    public void EmitMessageToServer(MessageReceive message){
+        JSONObject object = new JSONObject();
+        JSONObject messageIn = new JSONObject();
+        try {
+            object.put("users",message.users);
+            messageIn.put("userSendId",message.message.userSendId);
+            messageIn.put("userReceiveId",message.message.userReceiveId);
+            messageIn.put("message",message.message.message);
+            messageIn.put("type",message.message.type);
+            messageIn.put("time",message.message.time);
+            messageIn.put("displayName",message.message.displayName);
+            object.put("message",messageIn);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        SocketConnect.mSocklet.emit("send-message",object);
     }
 }
