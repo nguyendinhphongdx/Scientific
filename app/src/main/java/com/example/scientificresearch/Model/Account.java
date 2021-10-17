@@ -1,5 +1,8 @@
 package com.example.scientificresearch.Model;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,6 +52,13 @@ public class Account {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return account;
+    }
+    public Account getAccountFromStringObject(String string) {
+        Account account = new Account();
+        JsonObject jsonObject = new JsonParser().parse(string).getAsJsonObject();
+        account.setUsername(jsonObject.get("username").getAsString());
+        account.setPassword(jsonObject.get("password").getAsString());
         return account;
     }
 }

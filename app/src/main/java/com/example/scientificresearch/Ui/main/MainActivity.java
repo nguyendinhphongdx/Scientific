@@ -25,6 +25,7 @@ package com.example.scientificresearch.Ui.main;
         import com.example.scientificresearch.Common.Functions;
         import com.example.scientificresearch.Model.Message.Message;
         import com.example.scientificresearch.Model.Message.MessageReceive;
+        import com.example.scientificresearch.Model.Store;
         import com.example.scientificresearch.Notify.SetUpNotify;
         import com.example.scientificresearch.R;
         import com.example.scientificresearch.Server.Socket.io.SocketConnect;
@@ -108,8 +109,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("ReceiveMessage",messageReceive.message.message + " from "+ messageReceive.message.displayName);
                     Toast.makeText(MainActivity.this,messageReceive.message.message + " from "+ messageReceive.message.displayName,Toast.LENGTH_SHORT).show();
                     SetUpNotify.createLocalNotification(messageReceive.message.displayName,messageReceive.message.message,MainActivity.this);
-                    RoomActivity.addMessageFromMainASocket(messageReceive.message);
-
+                    if(Store.getClassSelected() != null){
+                        RoomActivity.addMessageFromMainASocket(messageReceive.message);
+                    }
                 }
             });
         }

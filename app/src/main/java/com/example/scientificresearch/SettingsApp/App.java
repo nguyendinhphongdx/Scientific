@@ -19,7 +19,7 @@ public class App extends Application {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
                     "Example Channel",
-                    NotificationManager.IMPORTANCE_DEFAULT
+                    NotificationManager.IMPORTANCE_HIGH
             );
             channel.setDescription("This is Channel ");
             NotificationManager manager = getSystemService(NotificationManager.class);

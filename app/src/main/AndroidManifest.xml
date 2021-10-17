@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
     <application
         android:name=".SettingsApp.App"
         android:usesCleartextTraffic="true"
@@ -32,7 +33,7 @@
         <activity android:name=".Ui.main.MainActivity"></activity>
         <activity android:name=".Ui.add.AddRoomActivity"></activity>
         <activity android:name=".Ui.room.RoomActivity"></activity>
-
+        <service android:name=".SettingsApp.MyService"/>
     </application>
 
 </manifest>

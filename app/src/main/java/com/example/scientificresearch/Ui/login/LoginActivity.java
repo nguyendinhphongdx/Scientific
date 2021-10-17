@@ -34,7 +34,9 @@ import com.example.scientificresearch.Notify.SetUpNotify;
 import com.example.scientificresearch.R;
 import com.example.scientificresearch.Server.ApiService.StudentService;
 import com.example.scientificresearch.Server.Socket.io.SocketConnect;
+import com.example.scientificresearch.SettingsApp.MyService;
 import com.example.scientificresearch.Ui.main.MainActivity;
+import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
 
@@ -46,6 +48,7 @@ import static com.example.scientificresearch.Model.Store.setCurrentUser;
 import static com.example.scientificresearch.SettingsApp.App.CHANNEL_ID;
 
 public class LoginActivity extends AppCompatActivity {
+    private static final String TAG = LoginActivity.class.getName();
     TextView edtMail, edtPass, edtUsername, tvSuggess;
     Button btnLogin,btnSignUp;
     RelativeLayout rlUsername;
@@ -86,7 +89,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setUp() {
         memory = authController.GetRememberAccount(LoginActivity.this);
-        Log.d("MEMORIES", "setUp: "+memory.getKey());
+        if(memory.getKey() != null){
+            Account accInMemory = new Account();
+            String object = memory.getValue();
+            accInMemory = account.getAccountFromStringObject(object);
+            edtMail.setText(accInMemory.getUsername());
+            edtPass.setText(accInMemory.getPassword());
+            login();
+        }
+
         if(isLogin){
             rlUsername.setVisibility(View.GONE);
             viewLine.setVisibility(View.GONE);
@@ -117,26 +128,24 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                         setCurrentUser(response.body().getData());
-                        SocketConnect.getInstance().Connect();
+                        //SocketConnect.getInstance().Connect();
+                        Intent intentService = new Intent(LoginActivity.this,MyService.class);
+                        startService(intentService);
                         ToastMessage(response.body().getMessage());
                     }else{
-                        Log.d("Login is unsuccess",response.raw().toString());
                         Toast.makeText(LoginActivity.this,"Login is unsuccess",Toast.LENGTH_SHORT).show();
                     }
-                    skeleton.setVisibility(View.GONE);
                 }
                 @Override
                 public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
                     ToastMessage("Authenticated Failed !!");
                     Log.d("Login Failed",t.toString());
-                    skeleton.setVisibility(View.GONE);
                 }
             });
         } else {
             ToastMessage("Info not Empty!!");
-            skeleton.setVisibility(View.GONE);
         }
-
+        skeleton.setVisibility(View.GONE);
     }
     private void ToastMessage(String message) {
         Toast.makeText(LoginActivity.this,message ,Toast.LENGTH_SHORT).show();

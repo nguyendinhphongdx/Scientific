@@ -29,15 +29,10 @@ public class AuthController {
     }
     public Memory GetRememberAccount(Context context){
         final Memory[] memory = {new Memory()};
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                DatabaseHandler handler = new DatabaseHandler(context);
-                if(handler.existsMemory(keyAccount)){
-                    memory[0] = handler.getMemory(keyAccount);
-                }
-            }
-        }).start();
+        DatabaseHandler handler = new DatabaseHandler(context);
+        if(handler.existsMemory(keyAccount)){
+            memory[0] = handler.getMemory(keyAccount);
+        }
         return memory[0];
     }
 }

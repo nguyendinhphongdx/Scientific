@@ -97,7 +97,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public boolean existsMemory(String key) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NAME, null, KEY + " = ?", new String[] { String.valueOf(key) },null, null, null);
-        if(cursor != null)
+        if(cursor.getCount() >0)
             return true;
         return false;
     }

@@ -36,7 +36,7 @@ public class SocketConnect {
         mSocklet = IO.socket(URI.create(Config.url),options);
     }
     public  void Connect(){
-        Log.d("Socket","is connecting ...");
+        Log.e("Socket","is connecting ..."+Store.getCurentUser().getID());
         mSocklet.connect();
     }
     public void EmitMessageToServer(MessageReceive message){
