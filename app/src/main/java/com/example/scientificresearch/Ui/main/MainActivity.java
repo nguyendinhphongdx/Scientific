@@ -40,6 +40,10 @@ package com.example.scientificresearch.Ui.main;
         import com.google.android.material.floatingactionbutton.FloatingActionButton;
         import com.google.android.material.navigation.NavigationView;
         import com.google.gson.JsonObject;
+        import com.huawei.hms.ads.AdListener;
+        import com.huawei.hms.ads.AdParam;
+        import com.huawei.hms.ads.BannerAdSize;
+        import com.huawei.hms.ads.banner.BannerView;
 
         import org.json.JSONArray;
         import org.json.JSONException;
@@ -86,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         fabAdd.setVisibility(View.GONE);
         setPositionCslFab();
         setUpFragment();
+
+
     }
 
     private void setListener() {
@@ -246,5 +252,6 @@ public class MainActivity extends AppCompatActivity {
             fabAddRoom.startAnimation(animation);
         }
     }
+
 }
 

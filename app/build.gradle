@@ -18,8 +18,21 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    signingConfigs {
+        config {
+            keyAlias 'key-alias'
+            storeFile file('E:/Newfolder/ProjectAndroid/Scientific/app/debug.jks')
+            storePassword 'Bkav@2021'
+            keyPassword 'Bkav@2021'
+        }
+    }
     buildTypes {
+        debug {
+            signingConfig signingConfigs.config
+        }
         release {
+            signingConfig signingConfigs.config
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -71,19 +84,8 @@ dependencies {
     // Choose Image Profile
     implementation 'com.mikhaellopez:circularimageview:4.2.0'
 
-    // Toasty
- //   implementation 'com.github.GrenderG:Toasty:1.5.0'
-
-    // load image
     def pickerVersion = "1.0.0" //look-up the latest one on jitpack
-    //the core package is a must then you include the one you need
-  //  implementation "com.github.FunkyMuse.MediaPicker:core:$pickerVersion"
 
-    //images
-  //  implementation "com.github.FunkyMuse.MediaPicker:imagepicker:$pickerVersion"
-
-    //permission
-//    implementation 'com.github.mukeshsolanki:easypermissions-android:2.0.3'
     //date time picker
     implementation 'com.wdullaer:materialdatetimepicker:4.2.3'
     // retrofit
@@ -106,4 +108,8 @@ dependencies {
     implementation ('io.socket:socket.io-client:2.0.0') {
         exclude group: 'org.json', module: 'json'
     }
+    implementation 'com.huawei.hms:hwid:5.0.5.301'
+    implementation 'com.huawei.hms:ads:3.4.49.301'
+
 }
+apply plugin: 'com.huawei.agconnect'

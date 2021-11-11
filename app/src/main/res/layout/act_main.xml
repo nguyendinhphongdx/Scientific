@@ -27,7 +27,6 @@
             android:layout_below="@id/toolbar"
             android:layout_marginTop="12dp"
             android:background="@drawable/bg_corner_tr_tl" />
-
         <include
             android:id="@+id/fabList"
             layout="@layout/layout_fab_add"

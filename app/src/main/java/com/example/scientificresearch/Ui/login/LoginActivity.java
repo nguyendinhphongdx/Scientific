@@ -135,17 +135,20 @@ public class LoginActivity extends AppCompatActivity {
                     }else{
                         Toast.makeText(LoginActivity.this,"Login is unsuccess",Toast.LENGTH_SHORT).show();
                     }
+                    skeleton.setVisibility(View.GONE);
                 }
                 @Override
                 public void onFailure(Call<ResponseModelLogin> call, Throwable t) {
                     ToastMessage("Authenticated Failed !!");
                     Log.d("Login Failed",t.toString());
+                    skeleton.setVisibility(View.GONE);
                 }
             });
         } else {
             ToastMessage("Info not Empty!!");
+            skeleton.setVisibility(View.GONE);
         }
-        skeleton.setVisibility(View.GONE);
+
     }
     private void ToastMessage(String message) {
         Toast.makeText(LoginActivity.this,message ,Toast.LENGTH_SHORT).show();
