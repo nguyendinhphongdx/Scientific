@@ -3,6 +3,7 @@ package com.example.scientificresearch.Model.Schedule;
 import com.google.gson.annotations.SerializedName;
 
 public class Schedule {
+    @SerializedName("Id")
     private Long id;
     @SerializedName("Subject")
     private String subject;

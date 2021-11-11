@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             accInMemory = account.getAccountFromStringObject(object);
             edtMail.setText(accInMemory.getUsername());
             edtPass.setText(accInMemory.getPassword());
-            login();
+//            login();
         }
 
         if(isLogin){
