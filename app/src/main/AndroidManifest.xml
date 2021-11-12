@@ -7,7 +7,17 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.SET_ALARM" />
-    <application android:name=".SettingsApp.App" android:usesCleartextTraffic="true" android:allowBackup="true" android:icon="@drawable/iconc_app" android:label="@string/app_name" android:roundIcon="@drawable/iconc_app" android:supportsRtl="true" android:noHistory="true" android:theme="@style/AppTheme">
+    <!--Camera permission-->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!--File read permission-->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <queries>
+        <intent>
+            <action android:name="com.huawei.hms.core.aidlservice" />
+        </intent>
+    </queries>
+    <application android:name=".SettingsApp.App" android:allowBackup="true" android:icon="@drawable/iconc_app" android:label="@string/app_name" android:noHistory="true" android:roundIcon="@drawable/iconc_app" android:supportsRtl="true" android:theme="@style/AppTheme" android:usesCleartextTraffic="true">
+        <activity android:name=".Ui.login.VerifyOTP" />
         <activity android:name=".Ui.splash.SplashActivity" android:label="@string/app_name" android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,10 +32,5 @@
         <service android:name=".SettingsApp.MyService" />
         <meta-data android:name="com.huawei.hms.client.channel.androidMarket" android:value="false" />
     </application>
-    <queries>
-        <intent>
-            <action android:name="com.huawei.hms.core.aidlservice" />
-        </intent>
-    </queries>
 </manifest>
 

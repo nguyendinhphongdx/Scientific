@@ -21,10 +21,10 @@ android {
 
     signingConfigs {
         config {
-            keyAlias 'key-alias'
             storeFile file('E:/Newfolder/ProjectAndroid/Scientific/app/debug.jks')
             storePassword 'Bkav@2021'
             keyPassword 'Bkav@2021'
+            keyAlias 'key-alias'
         }
     }
     buildTypes {
@@ -110,6 +110,9 @@ dependencies {
     }
     implementation 'com.huawei.hms:hwid:5.0.5.301'
     implementation 'com.huawei.hms:ads:3.4.49.301'
+    implementation "com.huawei.agconnect:agconnect-auth:1.6.1.300"
 
+    implementation 'com.huawei.hms:ads-identifier:3.4.34.301'
+    implementation 'com.huawei.hms:scan:1.3.2.300'
 }
 apply plugin: 'com.huawei.agconnect'

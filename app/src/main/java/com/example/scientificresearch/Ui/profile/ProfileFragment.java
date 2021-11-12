@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.example.scientificresearch.R;
 import com.example.scientificresearch.Server.ApiService.StudentService;
 import com.example.scientificresearch.Server.Config;
 import com.example.scientificresearch.Ui.login.LoginActivity;
+import com.example.scientificresearch.Ui.login.VerifyOTP;
 import com.example.scientificresearch.utils.ConvertData;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.squareup.picasso.Picasso;
@@ -38,6 +40,7 @@ public class ProfileFragment extends Fragment {
     List<Subject> subjects = Store.getSubject();
     CircularImageView img_profile;
     ConstraintLayout progess_Pro;
+    RelativeLayout imgSetting;
     public ProfileFragment() {
     }
 
@@ -92,6 +95,7 @@ public class ProfileFragment extends Fragment {
         edtMail = view.findViewById(R.id.edtMail);
         img_profile = view.findViewById(R.id.img_profile);
         rlLogout = view.findViewById(R.id.rlLogout);
+        imgSetting = view.findViewById(R.id.imgSetting);
 
     }
     private void setListener() {
@@ -101,6 +105,13 @@ public class ProfileFragment extends Fragment {
                 Intent intent = new Intent(getActivity(),LoginActivity.class);
                 startActivity(intent);
                 getActivity().finish();
+            }
+        });
+        imgSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), VerifyOTP.class);
+                startActivity(intent);
             }
         });
     }
