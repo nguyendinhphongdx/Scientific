@@ -100,6 +100,7 @@ public class NotiAdapter extends RecyclerView.Adapter<NotiAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     try {
+                        imageNoti.setImageResource(R.drawable.ic_notifications_white_24dp);
                         ScheduleController.SwitchAlarmSchedule(mContext,Long.parseLong(idSchedule.getText()+""));
                         String[] dateTime = tvTimeNoti.getText().toString().split(",");
                         String[] time = dateTime[1].split(":");

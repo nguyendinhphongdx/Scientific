@@ -114,7 +114,7 @@
         <RelativeLayout
             android:id="@+id/group_input"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="70dp"
             android:background="@color/gradStart"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
@@ -122,12 +122,15 @@
 
             <EditText
                 android:id="@+id/input_message"
-                android:layout_width="350dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginVertical="10sp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="0dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="20dp"
                 android:height="40sp"
                 android:background="@drawable/rounded_edittext"
                 android:hint="enter your message"
@@ -138,12 +141,14 @@
 
             <ImageButton
                 android:id="@+id/btnSend"
-                android:layout_width="48dp"
-                android:layout_height="40dp"
+                android:layout_width="47dp"
+                android:layout_height="47dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="1dp"
+                android:layout_marginBottom="13dp"
                 android:background="@color/Transparent"
                 android:rotation="-35"
                 android:src="@drawable/ic_baseline_send_24" />
