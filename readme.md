@@ -4,6 +4,7 @@
 +  Nếu đăng nhập xảy ra bất cứ lỗi gì 1 Toast thông báo hiện lên thông báo chính xác lỗi đó.
 
 ![alt text](https://github.com/nguyendinhphongdx/Scientific/blob/v2/main/image-app/login.png)
+
 2. HOme
 - Đặc tả chức năng:
 +   1 View thể hiện tên của tài khoản sinh viên đang sử dụng ứng dụng.
@@ -11,12 +12,14 @@
 +   1 Danh sách các lớp học và môn học cùng với điểm của lớp đó.
 +   1 số thông tin tổng quan nhất bao gồm: tổng khóa học / lớp học đang theo, tổng số tiền của tất cả khóa học, điểm trung bình tất cả các lớp đang theo.
 ![alt text](https://github.com/nguyendinhphongdx/Scientific/blob/v2/main/image-app/home.png)
+
 3. Classes
 - Đặc tả chức năng:
 +   Danh sách các lớp lớp học đang theo học.
 +   Click vào lớp học để xem chi  tiết của lớp học đó, bao gồm các thông : giảng viên của lớp, các thành viên cùng lớp. danh sách tài liệu đã được upload lên của lớp đó.
 
 ![alt text](https://github.com/nguyendinhphongdx/Scientific/blob/v2/main/image-app/classes.png)
+
 4.Schedule
 - Đặc tả chức năng:
 + 2 Date Picker cho phép xem lịch học theo thời gian tìm kiếm.
@@ -26,6 +29,7 @@ bao gồm thông tin về lớp, môn học, thời gian học giờ học và t
 -> đây là 1 tính năng vượt trội và cần thiết của ứng dụng.
 
 ![alt text](https://github.com/nguyendinhphongdx/Scientific/blob/v2/main/image-app/schedule.png)
+
 5. Profile
 - Đặc tả chứng năng:
 +   1 ImageView sử dụng thư viện picasso để load avatar của học viên.
